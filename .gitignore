@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+pyterum_example_sockets
+pyterum_debug.log
+
+venv*
