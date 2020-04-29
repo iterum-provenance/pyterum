@@ -8,7 +8,9 @@ from pyterum.logger import logger
 class FragmenterInput(SocketConn):
 
     def __init__(self, address:str=None):
-        address = env.FRAGMENTER_INPUT if address == None else address
+        if address == None:
+            env.verify_fragmenter_envs()
+            address = env.FRAGMENTER_INPUT
         super().__init__(address, retry_policy={"consume": 0})
 
         logger.info(f"Initializing FragmenterInput...")
@@ -32,7 +34,9 @@ class FragmenterInput(SocketConn):
 class FragmenterOutput(SocketConn):
 
     def __init__(self, address:str=None):
-        address = env.FRAGMENTER_OUTPUT if address == None else address
+        if address == None:
+            env.verify_fragmenter_envs()
+            address = env.FRAGMENTER_OUTPUT
         super().__init__(address, retry_policy={"produce": 0})
 
         logger.info(f"Initializing FragmenterOutput...")

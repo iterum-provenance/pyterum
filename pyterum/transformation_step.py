@@ -9,7 +9,9 @@ from pyterum.logger import logger
 class TransformationStepInput(SocketConn):
 
     def __init__(self, address:str=None):
-        address = env.TRANSFORMATION_STEP_INPUT if address == None else address
+        if address == None:
+            env.verify_transformation_step_envs()
+            address = env.TRANSFORMATION_STEP_INPUT
         super().__init__(address, retry_policy={"consume": -1})
 
         logger.info(f"Initializing TransformationStepInput...")
@@ -37,7 +39,9 @@ class TransformationStepInput(SocketConn):
 class TransformationStepOutput(SocketConn):
 
     def __init__(self, address:str=None):
-        address = env.TRANSFORMATION_STEP_OUTPUT if address == None else address
+        if address == None:
+            env.verify_transformation_step_envs()
+            address = env.TRANSFORMATION_STEP_OUTPUT
         super().__init__(address, retry_policy={"produce": 0})
 
         logger.info(f"Initializing TransformationStepOutput...")
