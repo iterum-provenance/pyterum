@@ -14,6 +14,8 @@ if __name__ == "__main__":
     for file_list in fragmenter_in.consumer():
         print(f"Fragmenter received: {file_list}", flush=True)
         if file_list == None:
+            fragmenter_out.produce_done()
+            fragmenter_out.close()
             break
 
         for f in file_list:

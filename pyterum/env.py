@@ -4,12 +4,12 @@ import os
 DATA_VOLUME_PATH = os.getenv("DATA_VOLUME_PATH")
 
 # Socket file paths for both what comes in and goes out
-FRAGMENTER_INPUT = DATA_VOLUME_PATH + "/" + os.getenv("FRAGMENTER_INPUT")
-FRAGMENTER_OUTPUT = DATA_VOLUME_PATH + "/" + os.getenv("FRAGMENTER_OUTPUT")
+FRAGMENTER_INPUT = ("" if DATA_VOLUME_PATH == None else DATA_VOLUME_PATH) + "/" + os.getenv("FRAGMENTER_INPUT", default="")
+FRAGMENTER_OUTPUT = ("" if DATA_VOLUME_PATH == None else DATA_VOLUME_PATH) + "/" + os.getenv("FRAGMENTER_OUTPUT", default="")
 
 # Socket file paths for both what comes in and goes out 
-TRANSFORMATION_STEP_INPUT = DATA_VOLUME_PATH + "/" + os.getenv("TRANSFORMATION_STEP_INPUT")
-TRANSFORMATION_STEP_OUTPUT = DATA_VOLUME_PATH + "/" + os.getenv("TRANSFORMATION_STEP_OUTPUT")
+TRANSFORMATION_STEP_INPUT = ("" if DATA_VOLUME_PATH == None else DATA_VOLUME_PATH) + "/" + os.getenv("TRANSFORMATION_STEP_INPUT", default="")
+TRANSFORMATION_STEP_OUTPUT = ("" if DATA_VOLUME_PATH == None else DATA_VOLUME_PATH) + "/" + os.getenv("TRANSFORMATION_STEP_OUTPUT", default="")
 
 # Size encoding of message with a default value of 4
 ENC_MSG_SIZE_LENGTH = os.getenv("ENC_MSG_SIZE_LENGTH", default=4)
