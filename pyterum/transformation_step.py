@@ -30,6 +30,7 @@ class TransformationStepInput(SocketConn):
 
             try:
                 KillMessage.from_json(msg)
+                output = None
             except (KeyError, TypeError):
                 pass
 
