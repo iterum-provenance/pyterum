@@ -1,9 +1,10 @@
 from __future__ import annotations
-from typing import List
+from typing import Dict
 
 class Metadata:
-    def __init__(self, output_channel:str=None):
+    def __init__(self, output_channel:str=None, custom:Dict[str, str]=None):
         self.output_channel = output_channel
+        self.custom = custom
     
     def __str__(self):
         return str(self.__dict__)
