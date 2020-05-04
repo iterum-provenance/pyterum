@@ -23,17 +23,17 @@ class TransformationStepInput(SocketConn):
     def consumer(self) -> LocalFragmentDesc:
         while True:
             msg = next(self._consumer)
+            output = None
             try:
                 output = LocalFragmentDesc.from_json(msg)
-            except (KeyError, TypeError):
-                pass
-
-            try:
-                KillMessage.from_json(msg)
-                output = None
-            except (KeyError, TypeError):
-                pass
-
+            except (KeyError, TypeError) as errFrag:
+                try:
+                    KillMessage.from_json(msg)
+                except (KeyError, TypeError) as errKill:
+                    logger.debug(errFrag)
+                    logger.debug(errKill)
+                    raise Exception("Could not parse message as LocalFragmentDesc nor as KillMessage")
+                
             yield output
 
 

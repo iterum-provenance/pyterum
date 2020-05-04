@@ -35,14 +35,16 @@ class LocalFragmentDesc:
         result += "    files: ["
         for f in self.files:
             result += "\n        " + str(f)
-        result += ("" if len(self.files) == 0 else "\n") + "]\n"
+        result += ("" if len(self.files) == 0 else "\n    ") + "]\n"
         result += "}"
         return result
 
     def to_json(self) -> dict:
         result = {}
         for key in self.__dict__.keys():
-            result[key] = self.__dict__[key]
+            if self.__dict__[key] != None:
+                result[key] = self.__dict__[key]
+                
         result["files"] = [f.to_json() for f in self.files]
         if self.metadata != None:
             result["metadata"] = self.metadata.to_json()
