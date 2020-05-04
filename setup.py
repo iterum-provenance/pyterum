@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'pyterum',         # How you named your package folder (MyLib)
   packages = ['pyterum'],   # Chose the same as "name"
-  version = '0.4.4',      # Start with a small number and increase it with every change you make
+  version = '0.4.5',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A Python client for interfacing with the Iterum framework for repeatable data science',
   author = 'Edser & Mark',                   # Type in your name
   author_email = '',      # Type in your E-Mail
   url = 'https://github.com/iterum-provenance/pyterum',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/iterum-provenance/pyterum/archive/v0.4.4.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/iterum-provenance/pyterum/archive/v0.4.5.tar.gz',    # I explain this later on
   keywords = ['Iterum', 'Python Client', 'Framework', 'Provenance', 'Data Science'],   # Keywords that define your package best
   install_requires=[],
   classifiers=[
