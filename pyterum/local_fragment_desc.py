@@ -57,7 +57,7 @@ class LocalFragmentDesc:
 
         result = cls([])
         result.files = [LocalFileDesc.from_json(f) for f in d["files"]]
-        if "metadata" in d:
+        if "metadata" in d and d["metadata"] != None:
             result.metadata = Metadata.from_json(d["metadata"])
 
         return result
