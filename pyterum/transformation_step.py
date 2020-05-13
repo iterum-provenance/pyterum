@@ -3,6 +3,7 @@ from typing import List
 from pyterum.socket_conn import SocketConn
 from pyterum.local_fragment_desc import LocalFragmentDesc
 from pyterum.kill_message import KillMessage
+from pyterum.finished_fragment_message import FinishedFragmentMessage
 from pyterum import env
 from pyterum.logger import logger
 
@@ -52,6 +53,9 @@ class TransformationStepOutput(SocketConn):
     def produce(self, data:LocalFragmentDesc):
         super().produce(data.to_json())
 
-    # To send that the fragmenter is done
-    def produce_done(self):
+    # To send that the fragmenter has completed
+    def produce_kill(self):
         super().produce(KillMessage().to_json())
+
+    def done_with(self, fragment:LocalFragmentDesc):
+        super().produce(FinishedFragmentMessage(fragment.metadata.fragment_id).to_json())

@@ -25,9 +25,9 @@ class LocalFileDesc:
 
 
 class LocalFragmentDesc:
-    def __init__(self, files:List[LocalFileDesc]):
+    def __init__(self, files:List[LocalFileDesc], predecessors:List[str]):
         self.files = files
-        self.metadata = None
+        self.metadata = Metadata(predecessors=predecessors)
     
     def __str__(self):
         result = "{\n"
@@ -46,8 +46,7 @@ class LocalFragmentDesc:
                 result[key] = self.__dict__[key]
                 
         result["files"] = [f.to_json() for f in self.files]
-        if self.metadata != None:
-            result["metadata"] = self.metadata.to_json()
+        result["metadata"] = self.metadata.to_json()
         return result
 
     @classmethod
@@ -55,9 +54,14 @@ class LocalFragmentDesc:
         if not isinstance(d, dict):
             raise TypeError("Argument 'd' is not of type 'dict'")
 
-        result = cls([])
+        result = cls([], [])
         result.files = [LocalFileDesc.from_json(f) for f in d["files"]]
-        if "metadata" in d and d["metadata"] != None:
-            result.metadata = Metadata.from_json(d["metadata"])
+        result.metadata = Metadata.from_json(d["metadata"])
 
         return result
+
+    def add_predecessor(self, predecessor:str):
+        self.metadata.predecessors.append(predecessor)
+
+    def add_file(self, filedesc:LocalFileDesc):
+        self.files.append(filedesc)
