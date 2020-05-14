@@ -60,8 +60,8 @@ class LocalFragmentDesc:
 
         return result
 
-    def add_predecessor(self, predecessor:str):
-        self.metadata.predecessors.append(predecessor)
+    def add_predecessor(self, predecessor:LocalFragmentDesc):
+        self.metadata.predecessors.append(predecessor.metadata.fragment_id)
 
     def add_file(self, filedesc:LocalFileDesc):
         self.files.append(filedesc)
