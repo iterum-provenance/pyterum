@@ -44,7 +44,7 @@ class TransformationStepOutput(SocketConn):
         if address == None:
             env.verify_transformation_step_envs()
             address = env.TRANSFORMATION_STEP_OUTPUT
-        super().__init__(address, retry_policy={"produce": 0})
+        super().__init__(address, retry_policy={"produce": -1})
 
         logger.info(f"Initializing TransformationStepOutput...")
         self.connect()
