@@ -51,5 +51,5 @@ class FragmenterOutput(SocketConn):
         super().produce(data)
 
     # To send that the fragmenter is done
-    def produce_kill(self):
+    def produce_done(self):
         super().produce(KillMessage().to_json())
