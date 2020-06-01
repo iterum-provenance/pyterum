@@ -2,6 +2,7 @@ from typing import List
 
 from pyterum.socket_conn import SocketConn
 from pyterum.kill_message import KillMessage
+from pyterum.fragmenter_input_message import FragmenterInputMessage
 from pyterum import env
 from pyterum.logger import logger
 
@@ -21,15 +22,18 @@ class FragmenterInput(SocketConn):
     # Yields None if the message is the kill message, indicating that there will be no more messages
     def consumer(self) -> List[str]:
         while True:
-            output = next(self._consumer)
+            msg = next(self._consumer)
+            output = None
             try:
-                KillMessage.from_json(output)
-                output = None
-            except (KeyError, TypeError):
-                pass
-
+                output = FragmenterInputMessage.from_json(msg)
+            except (KeyError, TypeError) as errFrag:
+                try:
+                    KillMessage.from_json(msg)
+                except (KeyError, TypeError) as errKill:
+                    logger.debug(errFrag)
+                    logger.debug(errKill)
+                    raise Exception("Could not parse message as FragmenterInputMessage nor as KillMessage")
             yield output
-
 
 class FragmenterOutput(SocketConn):
 
