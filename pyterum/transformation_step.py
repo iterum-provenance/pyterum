@@ -54,7 +54,7 @@ class TransformationStepOutput(SocketConn):
         super().produce(data.to_json())
 
     # To send that the fragmenter has completed
-    def produce_kill(self):
+    def produce_done(self):
         super().produce(KillMessage().to_json())
 
     def done_with(self, fragment:LocalFragmentDesc):
