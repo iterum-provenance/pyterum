@@ -47,7 +47,7 @@ def get_filepaths(names:List[str], retries:int=-1) -> List[str]:
 
 # Get one value from the JSON structure inserted into the ITERUM_CONFIG env variable
 def get(key:str):
-    verify_shared_envs()
+    env.verify_shared_envs()
     if key in env._CONFIG_DATA:
         return env._CONFIG_DATA[key]
     else:
