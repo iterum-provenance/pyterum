@@ -38,7 +38,7 @@ def recv_chunked(target: socket, message_length: int):
     chunks = []
     bytes_recd = 0
     while bytes_recd < message_length:
-        chunk = socket.recv(min(message_length - bytes_recd, 2048))
+        chunk = target.recv(min(message_length - bytes_recd, 2048))
         if chunk == b'':
             raise RuntimeError("Socket connection broken")
         chunks.append(chunk)
