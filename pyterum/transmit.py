@@ -23,6 +23,7 @@ def _decode_msg(target: socket):
     msg_size = _decode_msg_size(enc_msg_size)
 
     # enc_msg = target.recv(msg_size)
+    print(f"Trying to receive message in chunks..", flush=True)
 
     enc_msg = recv_chunked(socket, msg_size)
 
