@@ -23,9 +23,9 @@ def _decode_msg(target: socket):
     msg_size = _decode_msg_size(enc_msg_size)
     enc_msg = target.recv(msg_size)
 
-    print(f"enc_msg: {enc_msg}")
-    print(f"enc_msg_size: {enc_msg_size}")
-    print(f"msg_size: {msg_size}")
+    print(f"enc_msg: {enc_msg}", flush=True)
+    print(f"enc_msg_size: {enc_msg_size}", flush=True)
+    print(f"msg_size: {msg_size}", flush=True)
     return json.loads(enc_msg)
 
 
