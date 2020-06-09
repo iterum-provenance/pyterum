@@ -25,7 +25,18 @@ def _decode_msg(target: socket):
     # enc_msg = target.recv(msg_size)
     print(f"Trying to receive message in chunks..", flush=True)
 
-    enc_msg = recv_chunked(socket, msg_size)
+    # enc_msg = recv_chunked(socket, msg_size)
+
+    chunks = []
+    bytes_recd = 0
+    while bytes_recd < msg_size:
+        buf_size = min(msg_size - bytes_recd, 2048)
+        chunk = target.recv(buf_size)
+        if chunk == b'':
+            raise RuntimeError("Socket connection broken")
+        chunks.append(chunk)
+        bytes_recd = bytes_recd + len(chunk)
+    enc_msg = b''.join(chunks)
 
     print(f"enc_msg: {enc_msg}", flush=True)
     print(f"enc_msg_len: {len(enc_msg)}", flush=True)
