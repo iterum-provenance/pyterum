@@ -34,7 +34,7 @@ def _decode_msg(target: socket):
     return json.loads(enc_msg)
 
 
-def recv_chunked(target: socket, message_length: int):
+def recv_chunked(target: socket, message_length):
     chunks = []
     bytes_recd = 0
     while bytes_recd < message_length:
