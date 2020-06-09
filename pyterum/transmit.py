@@ -21,13 +21,28 @@ def _encode_bytes(content: bytes) -> bytes:
 def _decode_msg(target: socket):
     enc_msg_size = target.recv(env.ENC_MSG_SIZE_LENGTH)
     msg_size = _decode_msg_size(enc_msg_size)
-    enc_msg = target.recv(msg_size)
+
+    # enc_msg = target.recv(msg_size)
+
+    enc_msg = recv_chunked(socket, msg_size)
 
     print(f"enc_msg: {enc_msg}", flush=True)
     print(f"enc_msg_len: {len(enc_msg)}", flush=True)
     print(f"enc_msg_size: {enc_msg_size}", flush=True)
     print(f"msg_size: {msg_size}", flush=True)
     return json.loads(enc_msg)
+
+
+def recv_chunked(target: socket, message_length: int):
+    chunks = []
+    bytes_recd = 0
+    while bytes_recd < message_length:
+        chunk = socket.recv(min(message_length - bytes_recd, 2048))
+        if chunk == b'':
+            raise RuntimeError("Socket connection broken")
+        chunks.append(chunk)
+        bytes_recd = bytes_recd + len(chunk)
+    return b''.join(chunks)
 
 
 def _encode_msg(content) -> bytes:
