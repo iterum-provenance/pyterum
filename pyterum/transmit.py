@@ -34,18 +34,6 @@ def _decode_msg(target: socket):
     return json.loads(enc_msg)
 
 
-def recv_chunked(target: socket, message_length):
-    chunks = []
-    bytes_recd = 0
-    while bytes_recd < message_length:
-        chunk = target.recv(min(message_length - bytes_recd, 2048))
-        if chunk == b'':
-            raise RuntimeError("Socket connection broken")
-        chunks.append(chunk)
-        bytes_recd = bytes_recd + len(chunk)
-    return b''.join(chunks)
-
-
 def _encode_msg(content) -> bytes:
     return _encode_bytes(json.dumps(content).encode("utf-8"))
 

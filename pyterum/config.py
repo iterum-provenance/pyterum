@@ -11,7 +11,6 @@ RETRY_INTERVAL = 5
 # Wait until a requested file becomes available on disk, then return the path to it
 # retries <0 means infinite retries
 def _await_file(name:str, retries:int=-1) -> str:
-    print(env._CONFIG_DATA)
     # validate existence of passed name
     if "config_files" not in env._CONFIG_DATA.keys():
         logger.fatal(f"No config files were passed to this process, cannot get filepath")
