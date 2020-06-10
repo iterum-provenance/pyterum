@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='pyterum',         # How you named your package folder (MyLib)
     packages=['pyterum'],   # Chose the same as "name"
-    version='0.6.3',      # Start with a small number and increase it with every change you make
+    version='0.6.4',      # Start with a small number and increase it with every change you make
     # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     license='MIT',
     description='A Python client for interfacing with the Iterum framework for repeatable data science',

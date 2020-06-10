@@ -21,12 +21,6 @@ def _encode_bytes(content: bytes) -> bytes:
 def _decode_msg(target: socket):
     enc_msg_size = target.recv(env.ENC_MSG_SIZE_LENGTH)
     msg_size = _decode_msg_size(enc_msg_size)
-
-    # enc_msg = target.recv(msg_size)
-    print(f"Trying to receive message in chunks..", flush=True)
-
-    # enc_msg = recv_chunked(socket, msg_size)
-
     chunks = []
     bytes_recd = 0
     while bytes_recd < msg_size:
@@ -37,11 +31,6 @@ def _decode_msg(target: socket):
         chunks.append(chunk)
         bytes_recd = bytes_recd + len(chunk)
     enc_msg = b''.join(chunks)
-
-    print(f"enc_msg: {enc_msg}", flush=True)
-    print(f"enc_msg_len: {len(enc_msg)}", flush=True)
-    print(f"enc_msg_size: {enc_msg_size}", flush=True)
-    print(f"msg_size: {msg_size}", flush=True)
     return json.loads(enc_msg)
 
 
