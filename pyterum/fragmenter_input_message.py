@@ -4,7 +4,7 @@ import json
 
 from pyterum.local_fragment_desc import LocalFileDesc
 
-
+# Input message that a fragmenter receives.
 class FragmenterInputMessage:
     def __init__(self, data_files:List[str]):
         self.data_files = data_files

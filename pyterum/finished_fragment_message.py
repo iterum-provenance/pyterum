@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# The FinishedFragmentMessage denotes a fragment that is no longer used and so its data can be removed
 class FinishedFragmentMessage:
     def __init__(self, fragment_id:str):
         self.fragment_id = fragment_id

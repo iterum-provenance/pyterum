@@ -5,6 +5,11 @@ from socket import socket, AF_UNIX, SHUT_RDWR
 from pyterum import transmit
 from pyterum.logger import logger
 
+# Generalized type that sits underneath 
+# TransformationStepOutput, TransformationStepInput, FragmenterInput and FragmenterOutput
+# It handles a connection to a unix socket and tries to consume of produce messages on it
+# It encodes and decodes its messages using the `transmit` module. 
+# It automatically connects and retries certain attempts based on it parameters
 class SocketConn:
     def __init__(self, address:str, retry_policy:dict={str:int}):
         self.address:str = address

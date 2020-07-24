@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Dict, List
 
+#  Metadata is the structure that can be added to the LocalFragmentDesc to denote it
 class Metadata:
     def __init__(self, predecessors:List[str], fragment_id:str=None, output_channel:str=None, custom:Dict[str, str]=None):
         self.output_channel = output_channel

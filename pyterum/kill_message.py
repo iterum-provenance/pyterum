@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Message indicating that no more messages will be produced/received
+# This indicates: Stop when you are ready to stop
 class KillMessage:
     def __init__(self):
         self.status = "complete"

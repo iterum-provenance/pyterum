@@ -6,6 +6,9 @@ from pyterum.fragmenter_input_message import FragmenterInputMessage
 from pyterum import env
 from pyterum.logger import logger
 
+# FragmenterInput is a structure which consumes messages from the input socket.
+# The consumer is a generator allowing users to write simple for loops until 
+# no more messages arrive.
 class FragmenterInput(SocketConn):
 
     def __init__(self, address:str=None):
@@ -35,6 +38,8 @@ class FragmenterInput(SocketConn):
                     raise Exception("Could not parse message as FragmenterInputMessage nor as KillMessage")
             yield output
 
+# FragmenterOutput is the structure that sends random messages back to the
+# sidecar by serializing them as JSON.
 class FragmenterOutput(SocketConn):
 
     def __init__(self, address:str=None):

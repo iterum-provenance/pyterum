@@ -19,9 +19,6 @@ TRANSFORMATION_STEP_OUTPUT = os.path.join(DATA_VOLUME_PATH, os.getenv("TRANSFORM
 # Size encoding of message with a default value of 4
 ENC_MSG_SIZE_LENGTH = os.getenv("ENC_MSG_SIZE_LENGTH", default=4)
 
-EXAMPLE_SOCKET_INPUT = "./pyterum_example_sockets/example_in.sock"
-EXAMPLE_SOCKET_OUTPUT = "./pyterum_example_sockets/example_out.sock"
-
 def verify_shared_envs():
     assert DATA_VOLUME_PATH != ""
 

@@ -4,6 +4,10 @@ import json
 
 from pyterum import env
 
+# The module equivalent to the one found in the iterum-go repository.
+# This module implements the communication protocol between sidecar and user-defined container.
+# Each message is prepended by a 4 byte unsigned integer describing its total size.
+# Following that, the message is read 2048 bytes at a time until it is fully consumed
 
 def _encode_msg_size(size: int) -> bytes:
     return struct.pack("<I", size)

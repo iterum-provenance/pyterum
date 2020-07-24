@@ -3,6 +3,11 @@ from typing import List
 
 from pyterum.metadata import Metadata
 
+
+# Structures that implement the FragmentDesc specifications
+# These are both the structures received by transformation steps as well
+# as the ones that they should produce and send back
+
 class LocalFileDesc:
     def __init__(self, name:str, path:str):
         self.name = name
@@ -22,7 +27,6 @@ class LocalFileDesc:
         for key in result.__dict__.keys():
             result.__setattr__(key, d[key])
         return result
-
 
 class LocalFragmentDesc:
     def __init__(self, files:List[LocalFileDesc], predecessors:List[str]):
